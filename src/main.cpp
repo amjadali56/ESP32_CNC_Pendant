@@ -35,7 +35,8 @@ HardwareSerial PrinterSerial(2);
 #define PIN_RST_LCD 22
 
 
-U8G2_ST7920_128X64_F_HW_SPI u8g2_{U8G2_R3, PIN_CE_LCD, PIN_RST_LCD}; 
+U8G2_ST7920_128X64_F_HW_SPI u8g2_{U8G2_R3, PIN_CE_LCD, PIN_RST_LCD}; //For HW SPI 
+//U8G2_ST7920_128X64_F_SW_SPI u8g2_(U8G2_R3, PIN_CE_LCD, 2, 15, PIN_RST_LCD); // for SW SPI E=4, RW=2, RS=15, RST=22
 U8G2 &Display::u8g2 = u8g2_;
 
 
@@ -93,9 +94,9 @@ void setup() {
     u8g2_.setFontPosTop();
     u8g2_.setFontMode(1);
 
-    digitalWrite(PIN_RST_LCD, LOW);
-    delay(100);
-    digitalWrite(PIN_RST_LCD, HIGH);
+    digitalWrite(PIN_RST_LCD, LOW);   //Disable for SW SPI
+    delay(100);                       //Disable for SW SPI
+    digitalWrite(PIN_RST_LCD, HIGH);  //Disable for SW SPI
 
 
     Serial.print("Initializing SD card...");
